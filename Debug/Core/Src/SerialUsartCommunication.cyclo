@@ -3,8 +3,8 @@ C:\ST\STM32CubeIDE_1.18.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.external
 ../Core/Src/SerialUsartCommunication.cpp:26:1:SerialUsartCommunication::SerialUsartCommunication(UART_HandleTypeDef*)	1
 ../Core/Src/SerialUsartCommunication.cpp:35:6:void SerialUsartCommunication::send(std::string, int8_t)	3
 ../Core/Src/SerialUsartCommunication.cpp:49:6:void echo(int8_t)	1
-../Core/Src/SerialUsartCommunication.cpp:63:7:void HAL_UART_RxCpltCallback(UART_HandleTypeDef*)	4
-../Core/Src/SerialUsartCommunication.cpp:81:6:void SerialUsartCommunication::recieve(uint8_t)	4
-../Core/Src/SerialUsartCommunication.cpp:96:10:static uint8_t* SerialUsartCommunication::receiveCompleted()	2
-../Core/Src/SerialUsartCommunication.cpp:107:1:SerialUsartCommunication::~SerialUsartCommunication()	1
-../Core/Src/SerialUsartCommunication.cpp:107:1:virtual SerialUsartCommunication::~SerialUsartCommunication()	1
+../Core/Src/SerialUsartCommunication.cpp:61:7:void HAL_UART_RxCpltCallback(UART_HandleTypeDef*)	4
+../Core/Src/SerialUsartCommunication.cpp:75:6:void SerialUsartCommunication::recieve(uint8_t)	4
+../Core/Src/SerialUsartCommunication.cpp:90:10:static uint8_t* SerialUsartCommunication::receiveCompleted()	2
+../Core/Src/SerialUsartCommunication.cpp:101:1:SerialUsartCommunication::~SerialUsartCommunication()	1
+../Core/Src/SerialUsartCommunication.cpp:101:1:virtual SerialUsartCommunication::~SerialUsartCommunication()	1

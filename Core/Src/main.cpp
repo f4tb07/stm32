@@ -44,10 +44,7 @@
 UART_HandleTypeDef huart1;
 /* USER CODE BEGIN PV */
 SerialUsartCommunication serial(&huart1);
-int count=1000;
 std::string msg = "\n\rthis is a test\n\r";
-uint8_t rByte[2];
-uint8_t rIdx=0,i=0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
