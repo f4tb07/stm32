@@ -6,12 +6,18 @@
  */
 
 #include "bandWithGenarator.h"
+#include "PMW.h"
 
 bandWithGenarator::bandWithGenarator(TIM_HandleTypeDef* timerHandler,double cpuFreq,double pmwFreq,int8_t dutyCycle,int8_t activeCH)
-									:PMW(timerHandler,cpuFreq,pmwFreq,dutyCycle,activeCH)
+									//:PMW(timerHandler,cpuFreq,pmwFreq,dutyCycle,activeCH)
 {
 	// TODO Auto-generated constructor stub
 
+}
+
+void bandWithGenarator::bandTimeCalculator(double uptime)
+{
+	doCalculation();
 }
 
 bandWithGenarator::~bandWithGenarator() {

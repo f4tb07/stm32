@@ -40,6 +40,9 @@ void PMW::doCalculation()
     CCR = counterPeriodValue * float(DUTY_CYCLE)/100;
 }
 
+
+
+
 void PMW::fire(int8_t newDutyCycle)
 {
   DUTY_CYCLE=newDutyCycle;

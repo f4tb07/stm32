@@ -15,6 +15,7 @@ public:
 	PMW(TIM_HandleTypeDef*,double,double,int8_t,int8_t);
     void fire(int8_t);
 	virtual ~PMW();
+
 private:
   TIM_HandleTypeDef* pmwHandler;
   double CPU_FREQUENCY;
@@ -28,6 +29,7 @@ private:
   int8_t ACTIVE_CHANNEL;
 protected:
   void doCalculation(void);
+
 };
 
 #endif /* SRC_PMW_H_ */

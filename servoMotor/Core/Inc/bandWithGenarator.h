@@ -10,10 +10,11 @@
 
 #include "PMW.h"
 
-class bandWithGenarator: public PMW {
+class bandWithGenarator:PMW {
 public:
 	bandWithGenarator();
 	bandWithGenarator(TIM_HandleTypeDef* ,double ,double,int8_t,int8_t );
+	void bandTimeCalculator(double);
 	virtual ~bandWithGenarator();
 };
 
