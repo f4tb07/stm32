@@ -21,11 +21,21 @@ PMW::PMW(TIM_HandleTypeDef* timerHandler,double cpuFreq,double pmwFreq,int8_t du
 
 }
 
+
+PMW::PMW(TIM_HandleTypeDef* timerHandler,double cpuFreq,double pmwFreq,int8_t activeCH)
+{
+	pmwHandler = timerHandler;
+	CPU_FREQUENCY = cpuFreq;
+	pmwFrequnecy = pmwFreq;
+	ACTIVE_CHANNEL = activeCH;
+
+}
+
 PMW::~PMW() {
 	// TODO Auto-generated destructor stub
 }
 
-void PMW::doCalculation()
+void PMW::doTimerCalculation()
 {
 	CPU_PERIOD = 1/CPU_FREQUENCY;
 	pmwPeriod = 1/pmwFrequnecy;
@@ -37,16 +47,19 @@ void PMW::doCalculation()
     }
     else
     	preScalerValue = 0;
-    CCR = counterPeriodValue * float(DUTY_CYCLE)/100;
+    //CCR = counterPeriodValue * float(DUTY_CYCLE)/100;
 }
-
-
+uint32_t PMW::CCR_Claculation(void)
+{
+	return counterPeriodValue * float(DUTY_CYCLE)/100;
+}
 
 
 void PMW::fire(int8_t newDutyCycle)
 {
   DUTY_CYCLE=newDutyCycle;
-  doCalculation();
+  doTimerCalculation();
+  CCR = CCR_Claculation();
   pmwHandler->Instance->ARR = counterPeriodValue-1;
   pmwHandler->Instance->PSC = preScalerValue-(preScalerValue>0);
   switch (ACTIVE_CHANNEL)
@@ -64,7 +77,15 @@ void PMW::fire(int8_t newDutyCycle)
           pmwHandler->Instance->CCR4=CCR;
           break;
   }
-
-
 }
 
+
+double PMW::getCpuPeriod()
+{
+	return CPU_PERIOD;
+}
+
+void PMW::setCCR(uint32_t newCCR)
+{
+	CCR = newCCR;
+}

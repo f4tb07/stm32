@@ -13,14 +13,16 @@ class PMW {
 public:
 	PMW();
 	PMW(TIM_HandleTypeDef*,double,double,int8_t,int8_t);
+	PMW(TIM_HandleTypeDef*,double,double,int8_t);
     void fire(int8_t);
 	virtual ~PMW();
-
+	virtual uint32_t CCR_Claculation(void);
 private:
   TIM_HandleTypeDef* pmwHandler;
-  double CPU_FREQUENCY;
+
   int8_t DUTY_CYCLE;
   double CPU_PERIOD;
+  double CPU_FREQUENCY;
   double pmwFrequnecy;
   double pmwPeriod;
   uint32_t counterPeriodValue;
@@ -28,7 +30,10 @@ private:
   uint32_t CCR;
   int8_t ACTIVE_CHANNEL;
 protected:
-  void doCalculation(void);
+  void doTimerCalculation(void);
+  double getCpuPeriod(void);
+  void setCCR(uint32_t);
+
 
 };
 

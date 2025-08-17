@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "bandWithGenarator.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -99,6 +99,10 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  bandWithGenarator  bandGen(&htim1,8000000,240,TIM_CHANNEL_1,1);
+  //bandGen.
+  HAL_TIM_Base_Start(&htim1);
+  HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1);
   while (1)
   {
     /* USER CODE END WHILE */
