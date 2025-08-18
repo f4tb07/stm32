@@ -24,7 +24,7 @@ uint32_t bandWithGenarator::CCR_Calculation(double upTime)
 	return floor((upTime*pow(10.0,-6.0)	)/getCpuPeriod());
 }
 
-void bandWithGenarator::bandTimeCalculator(uint8_t upTime)
+void bandWithGenarator::generateWave(uint8_t upTime)
 {
 
     doTimerCalculation();
