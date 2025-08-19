@@ -57,6 +57,10 @@ uint32_t PMW::CCR_Claculation(void)
 	return counterPeriodValue * float(DUTY_CYCLE)/100;
 }
 
+auto CCRClu = [](uint8_t dCycle,uint32_t cPeriod)->uint32_t{
+	return cPeriod * float(dCycle)/100;
+};
+
 void PMW::CCRSeletorAndSetter(int32_t newCCR)
 {
 	CCR= newCCR;
@@ -83,7 +87,7 @@ void PMW::fire(int8_t newDutyCycle)
   DUTY_CYCLE=newDutyCycle;
   doTimerCalculation();
   //CCR = CCR_Claculation();
-  CCRSeletorAndSetter(CCR_Claculation());
+  CCRSeletorAndSetter(CCRClu(DUTY_CYCLE,counterPeriodValue));
   pmwHandler->Instance->ARR = counterPeriodValue-1;
   pmwHandler->Instance->PSC = preScalerValue-(preScalerValue>0);
 }
