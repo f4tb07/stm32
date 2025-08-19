@@ -7,6 +7,8 @@
 
 #include "PMW.h"
 #include "math.h"
+#include "functional"
+
 PMW::PMW() {
 	// TODO Auto-generated constructor stub
 
@@ -28,6 +30,7 @@ PMW::PMW(TIM_HandleTypeDef* timerHandler,double cpuFreq,double pmwFreq,int8_t ac
 	CPU_FREQUENCY = cpuFreq;
 	pmwFrequnecy = pmwFreq;
 	ACTIVE_CHANNEL = activeCH;
+
 
 }
 
@@ -54,30 +57,54 @@ uint32_t PMW::CCR_Claculation(void)
 	return counterPeriodValue * float(DUTY_CYCLE)/100;
 }
 
+void PMW::CCRSeletorAndSetter(int32_t newCCR)
+{
+	CCR= newCCR;
+	 switch (ACTIVE_CHANNEL)
+		  {
+			 case TIM_CHANNEL_1:
+				  pmwHandler->Instance->CCR1=newCCR;
+				  break;
+			 case TIM_CHANNEL_2:
+				  pmwHandler->Instance->CCR2=newCCR;
+				  break;
+			 case TIM_CHANNEL_3:
+				  pmwHandler->Instance->CCR3=newCCR;
+				  break;
+			 case TIM_CHANNEL_4:
+				  pmwHandler->Instance->CCR4=newCCR;
+				  break;
+		  }
+}
+
 
 void PMW::fire(int8_t newDutyCycle)
 {
   DUTY_CYCLE=newDutyCycle;
   doTimerCalculation();
-  CCR = CCR_Claculation();
+  //CCR = CCR_Claculation();
+  CCRSeletorAndSetter(CCR_Claculation());
   pmwHandler->Instance->ARR = counterPeriodValue-1;
   pmwHandler->Instance->PSC = preScalerValue-(preScalerValue>0);
-  switch (ACTIVE_CHANNEL)
-  {
-  	 case TIM_CHANNEL_1:
-      	  pmwHandler->Instance->CCR1=CCR;
-      	  break;
-  	 case TIM_CHANNEL_2:
-       	  pmwHandler->Instance->CCR2=CCR;
-       	  break;
-     case TIM_CHANNEL_3:
-          pmwHandler->Instance->CCR3=CCR;
-          break;
-     case TIM_CHANNEL_4:
-          pmwHandler->Instance->CCR4=CCR;
-          break;
-  }
 }
+/*
+	  switch (ACTIVE_CHANNEL)
+	  {
+		 case TIM_CHANNEL_1:
+			  pmwHandler->Instance->CCR1=CCR;
+			  break;
+		 case TIM_CHANNEL_2:
+			  pmwHandler->Instance->CCR2=CCR;
+			  break;
+		 case TIM_CHANNEL_3:
+			  pmwHandler->Instance->CCR3=CCR;
+			  break;
+		 case TIM_CHANNEL_4:
+			  pmwHandler->Instance->CCR4=CCR;
+			  break;
+	  }
+*/
+
 
 
 double PMW::getCpuPeriod()
@@ -87,5 +114,6 @@ double PMW::getCpuPeriod()
 
 void PMW::setCCR(uint32_t newCCR)
 {
-	CCR = newCCR;
+	  CCRSeletorAndSetter(newCCR);
+
 }

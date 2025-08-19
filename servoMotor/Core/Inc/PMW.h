@@ -19,7 +19,7 @@ public:
 	virtual uint32_t CCR_Claculation(void);
 private:
   TIM_HandleTypeDef* pmwHandler;
-
+  void CCRSeletorAndSetter(int32_t );
   int8_t DUTY_CYCLE;
   double CPU_PERIOD;
   double CPU_FREQUENCY;
