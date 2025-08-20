@@ -14,7 +14,7 @@ class bandWithGenarator:public PMW {
 public:
 	uint32_t CCR_Calculation(double);
 	bandWithGenarator();
-	bandWithGenarator(TIM_HandleTypeDef* ,double ,double,int8_t,uint8_t);
+	bandWithGenarator(TIM_HandleTypeDef* ,double ,double,int8_t,float);
 	void generateWave(uint8_t);
 	virtual ~bandWithGenarator();
 

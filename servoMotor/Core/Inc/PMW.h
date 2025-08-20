@@ -33,8 +33,9 @@ protected:
   void doTimerCalculation(void);
   double getCpuPeriod(void);
   void setCCR(uint32_t);
-
-
+  uint32_t getCounterPeriod(void);
+  uint32_t getPreScaler(void);
+  double getPMWPeriod(void);
 };
 
 #endif /* SRC_PMW_H_ */

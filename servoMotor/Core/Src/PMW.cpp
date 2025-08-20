@@ -121,3 +121,17 @@ void PMW::setCCR(uint32_t newCCR)
 	  CCRSeletorAndSetter(newCCR);
 
 }
+
+
+uint32_t PMW::getCounterPeriod(void)
+{
+	return counterPeriodValue;
+}
+uint32_t PMW::getPreScaler(void)
+{
+	return preScalerValue;
+}
+double PMW::getPMWPeriod(void)
+{
+	return pmwPeriod;
+}
