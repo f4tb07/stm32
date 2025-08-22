@@ -99,9 +99,15 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  bandWithGenarator  bandGen(&htim1,8000000,150,TIM_CHANNEL_1,2);
+  bandWithGenarator  bandGen(&htim1,8000000,50,TIM_CHANNEL_1,0.4);
+  double with=0.4,inc=0.02;
   while (1)
   {
+	  bandGen.generateWave(with);
+	  with += inc;
+	  HAL_Delay(100);
+	  if(with>2.5) inc=-0.02;
+	  if(with<0.4) inc=0.02;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

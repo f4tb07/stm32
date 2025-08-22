@@ -27,12 +27,13 @@ uint32_t bandWithGenarator::CCR_Calculation(double upTime)
 	return getCounterPeriod()*((upTime*pow(10.0,-3.0))/getPMWPeriod());
 }
 
-void bandWithGenarator::generateWave(uint8_t upTime)
+void bandWithGenarator::generateWave(double upTime)
 {
 
-    doTimerCalculation();
-	double tmpCCR =floor((upTime*pow(10.0,-6.0)	)/getCpuPeriod());
-    setCCR(tmpCCR);
+    //doTimerCalculation();
+	//double tmpCCR =floor((upTime*pow(10.0,-6.0)	)/getCpuPeriod());
+    //setCCR(tmpCCR);
+	setCCR(CCR_Calculation(upTime));
 }
 
 bandWithGenarator::~bandWithGenarator() {
