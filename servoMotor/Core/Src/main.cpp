@@ -22,6 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "bandWithGenarator.h"
+#include "math.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -103,11 +104,13 @@ int main(void)
   double with=0.4,inc=0.02;
   while (1)
   {
+
 	  bandGen.generateWave(with);
 	  with += inc;
 	  HAL_Delay(100);
 	  if(with>2.5) inc=-0.02;
 	  if(with<0.4) inc=0.02;
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
