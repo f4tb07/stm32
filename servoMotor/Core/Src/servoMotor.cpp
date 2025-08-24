@@ -8,26 +8,32 @@
 #include "servoMotor.h"
 
 
-
+double tmp;
 servoMotor::servoMotor() {
 	// TODO Auto-generated destructor stub
 }
 
-servoMotor::servoMotor(TIM_HandleTypeDef* pmwGeneratorTimer, float startBand,float endBand,double pmwfreq,double cpufreq,int8_t activeCH,int8_t initAngle):bandWithGenarator(pmwGeneratorTimer,cpufreq,pmwfreq,activeCH,startBand)
+servoMotor::servoMotor(TIM_HandleTypeDef* pmwGeneratorTimer, float startBand,float endBand,double pmwfreq,double cpufreq,int8_t activeCH,int16_t initAngle):bandWithGenarator(pmwGeneratorTimer,cpufreq,pmwfreq,activeCH,startBand)
 {
 	startBandWith = startBand;
 	endBandWith = endBand;
-	mapAngle2BandWtih = [this](int8_t value)
+	mapAngle2BandWtih = [this](int16_t value)
 	{
-		return (value/90) + this->startBandWith;
+		//tmp=double(value)/90; //+ this->startBandWith;
+		return (double(value)/90) + this->startBandWith;
 	};
     gotoAngle(initAngle);
 }
 
-void servoMotor::gotoAngle(int8_t inputAngle)
+int8_t servoMotor::getAngle(void){
+	return angle;
+}
+
+void servoMotor::gotoAngle(int16_t inputAngle)
 {
 	if(inputAngle == angle) return;
-	generateWave(mapAngle2BandWtih(inputAngle));
+    tmp = mapAngle2BandWtih(inputAngle);
+	generateWave(tmp);
 	angle=inputAngle;
 }
 

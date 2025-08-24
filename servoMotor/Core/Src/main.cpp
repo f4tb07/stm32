@@ -23,6 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include "bandWithGenarator.h"
 #include "math.h"
+#include "servoMotor.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -100,16 +101,19 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  bandWithGenarator  bandGen(&htim1,8000000,50,TIM_CHANNEL_1,0.4);
-  double with=0.4,inc=0.02;
+  //bandWithGenarator  bandGen= bandWithGenarator(&htim1,8000000,50,TIM_CHANNEL_1,0.4);
+  servoMotor leftArm= servoMotor(&htim1,0.5,2.5,240,8000000,TIM_CHANNEL_1,0);
+  int16_t angle=0,inc=1;
   while (1)
   {
 
-	  bandGen.generateWave(with);
-	  with += inc;
-	  HAL_Delay(100);
-	  if(with>2.5) inc=-0.02;
-	  if(with<0.4) inc=0.02;
+	  leftArm.gotoAngle(angle);
+	  angle+=inc;
+	  HAL_Delay(250);
+
+	  if(angle>=180) inc=-1;
+
+	  if(angle<=0) inc=1;
 
     /* USER CODE END WHILE */
 
