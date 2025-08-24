@@ -24,6 +24,7 @@
 #include "bandWithGenarator.h"
 #include "math.h"
 #include "servoMotor.h"
+#include "SerialUsartCommunication.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -56,7 +57,7 @@ static void MX_GPIO_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_TIM1_Init(void);
 /* USER CODE BEGIN PFP */
-
+SerialUsartCommunication serial=SerialUsartCommunication(&huart1);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -104,6 +105,8 @@ int main(void)
   //bandWithGenarator  bandGen= bandWithGenarator(&htim1,8000000,50,TIM_CHANNEL_1,0.4);
   servoMotor leftArm= servoMotor(&htim1,0.5,2.5,240,8000000,TIM_CHANNEL_1,0);
   int16_t angle=0,inc=1;
+  //serial.recieve(5);
+
   while (1)
   {
 

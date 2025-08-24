@@ -15,6 +15,8 @@ uint8_t* SerialUsartCommunication::reciveBuffer;
 int8_t SerialUsartCommunication::RCV_BUFF_SIZE ;
 uint8_t rcvByte[2];
 int rcvIdx=0;
+//template <typename,T>
+std::function<int16_t(void)> interPerter;
 
 
 
@@ -72,7 +74,7 @@ extern "C"
 	}
 }
 
-void SerialUsartCommunication::recieve(uint8_t rcvBuffSize)
+void SerialUsartCommunication::recieve(uint8_t rcvBuffSize,std::function<int16_t(void)> recieveType)
 {
 
 	if(rcvBuffSize>0)
@@ -86,17 +88,41 @@ void SerialUsartCommunication::recieve(uint8_t rcvBuffSize)
 		HAL_UART_Receive_IT(USART_HANDLER, rcvByte, 1);
 }
 
+int16_t SerialUsartCommunication::IrecieveAngle()
+{
+
+	interPerter = [this]()
+	{
+		int16_t angle;
+		uint8_t* tmpCharMemPtr = (uint8_t*) malloc(this->RCV_BUFF_SIZE);
+		memcpy(tmpCharMemPtr,this->reciveBuffer,this->RCV_BUFF_SIZE);
+		free(this->reciveBuffer);
+		if(tmpCharMemPtr[0]=='<' && tmpCharMemPtr[this->RCV_BUFF_SIZE-1]=='>')
+		    {
+		    	int16_t hunderd=tmpCharMemPtr[1]*100;
+		    	int16_t ten=tmpCharMemPtr[2]*10;
+		    	angle = hunderd + ten + tmpCharMemPtr[3];
+		    }
+		return angle;
+	};
+	//recieve(5,interPerter);r
+}
+
 
 uint8_t* SerialUsartCommunication::receiveCompleted ()
 {
 
 	if(rcvIdx>=RCV_BUFF_SIZE)
 		{
+		     HAL_UART_AbortReceive(USART_HANDLER);
+		     //interPerter();
 			 return reciveBuffer; //here we have a mem allocation which is not freed. And must mange
 		}
 	else
 		return 0;
 }
+
+
 
 SerialUsartCommunication::~SerialUsartCommunication() {
 	// TODO Auto-generated destructor stub
