@@ -15,8 +15,9 @@ uint8_t* SerialUsartCommunication::reciveBuffer;
 int8_t SerialUsartCommunication::RCV_BUFF_SIZE ;
 uint8_t rcvByte[2];
 int rcvIdx=0;
-//template <typename,T>
-std::function<int16_t(void)> interPerter;
+//auto interPerter=0;
+template <typename T>
+std::function<T()> interPerter;
 
 
 
@@ -91,6 +92,7 @@ void SerialUsartCommunication::recieve(uint8_t rcvBuffSize,std::function<int16_t
 int16_t SerialUsartCommunication::IrecieveAngle()
 {
 
+    std::function<int16_t()> interPerter;
 	interPerter = [this]()
 	{
 		int16_t angle;
